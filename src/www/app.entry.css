@@ -1,0 +1,8 @@
+html {
+    font-size: 13px;
+    font-family: Arial;
+}
+
+/* COMPONENTES DEL FRAMEWORK DE STD */
+
+/*$.compiler.inject.source("@/src/Std/apis/styles/std.entry.css")*/

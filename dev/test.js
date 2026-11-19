@@ -1,0 +1,1 @@
+console.log("[!] There are no tests for now.");

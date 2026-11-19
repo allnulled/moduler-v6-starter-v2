@@ -1,0 +1,17 @@
+{
+  "name": "moduler-v6-starter-v2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node dev/loop.js",
+    "test": "node dev/test.js"
+  },
+  "keywords": [],
+  "author": "allnulled",
+  "license": "WTFPL",
+  "description": "",
+  "devDependencies": {
+    "chokidar": "^5.0.0",
+    "picomatch": "^4.0.7"
+  }
+}

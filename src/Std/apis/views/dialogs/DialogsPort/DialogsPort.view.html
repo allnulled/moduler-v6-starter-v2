@@ -1,0 +1,7 @@
+<div class="View DialogsPort">
+    <DialogView class="GlobalDialog"
+        v-for="subthread, subthreadIndex in $locals.opened"
+        v-bind:key="'global_dialog_' + subthread.threadId"
+        ref="currentDialogs"
+        :thread="subthread" />
+</div>

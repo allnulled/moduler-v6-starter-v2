@@ -1,0 +1,10 @@
+<div class="View DialogsTree" v-on:click="() => $forceUpdate(true)">
+    <DialogsTreeNode
+        v-for="item in $locals.orderedThreads"
+        :thread="item.thread"
+        :level="item.level"
+        :port="dialogsPort"
+        ref="currentNodes"
+        v-bind:key="item.thread.threadId"
+    />
+</div>

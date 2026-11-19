@@ -1,0 +1,5 @@
+// @interface:ValidationMemoryInterface
+{
+  prototype: {},
+  static: {},
+}
