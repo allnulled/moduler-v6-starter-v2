@@ -66,12 +66,12 @@ class Performancer {
     if(ms === 0) return 0;
     return (ms / 1000).toFixed(3);
   }
-  print(id = null) {
+  print(id = null, ...args) {
     $compiler.inject.template("@/src/Std/snippets/methodLog.js", {name:"Std.classes.Performancer.prototype.print"});
     if(id === null) {
       let counter = 0;
       for(let key in this.cronometers) {
-        console.log(` - ${++counter}. ${key}: ${this.totalOf(key)}`);
+        console.log(` - ${++counter}. ${key}: ${this.totalOf(key)}`, ...args);
       }
       return;
     }

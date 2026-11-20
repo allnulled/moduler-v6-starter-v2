@@ -1492,13 +1492,20 @@ function peg$parse(input, options) {
           toDirectory(dir, filenameBrute) {
             const fs = require("fs");
             const filename = filenameBrute.replace(/\.js$/g, "");
-            const files = Object.keys(this.channel).filter(id => id.startsWith("~."));
-            const promises = files.map(id => {
+            const filenames = Object.keys(this.channel).filter(id => id.startsWith("~."));
+            const files = [];
+            const promises = filenames.reduce((out, id) => {
               const filepathBrute = $moduler._joinPaths([dir, id.replace("~", filename)])
               const filepath = $moduler.normalizationOf(filepathBrute);
               const filecontent = this.channel[id].content;
-              return fs.promises.writeFile(filepath, filecontent, "utf8");
-            });
+              const filepromise = filecontent ? fs.promises.writeFile(filepath, filecontent, "utf8") : new Promise((resolve, reject) => { resolve() });
+              const fileroot = $moduler.rootdirOf(filepath);
+              out[fileroot] = {
+                content: filecontent,
+                promise: filepromise,
+              };
+              return out;
+            }, {});
             return { files, promises };
           }
         },
@@ -1861,8 +1868,8 @@ function peg$parse(input, options) {
     ], this);
   }
 
-  constructor(defaultOptions = {}) {
-    Object.assign(this, {}, this.constructor.defaultInstance, defaultOptions);
+  constructor(defaultOptions = {}, defaultSettings = {}) {
+    Object.assign(this, {}, defaultOptions);
   }
 
 };

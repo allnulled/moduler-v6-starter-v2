@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "node dev/loop.js",
-    "test": "node dev/test.js"
+    "up": "bash up.sh && node up-cleaner.js",
+    "loop": "node dev/run.js loop",
+    "console": "node dev/run.js console",
+    "test": "node dev/run.js test"
   },
   "keywords": [],
   "author": "allnulled",

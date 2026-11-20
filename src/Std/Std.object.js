@@ -67,8 +67,11 @@
     Std.all.trify = Std.functions.trify = $compiler.inject.source("./apis/errors/trify/trify.function.js");
     Std.all.extractSubstrings = Std.functions.extractSubstrings = $compiler.inject.source("./apis/string/extractSubstrings/extractSubstrings.function.js");
     Std.all.capitalizeString = Std.functions.capitalizeString = $compiler.inject.source("./apis/string/capitalizeString.function.js");
+    Std.all.classicStringFormat = Std.functions.classicStringFormat = $compiler.inject.source("./apis/string/function.classicStringFormat.js");
+    Std.all.DateFormatter = Std.classes.DateFormatter = $compiler.inject.source("./apis/time/DateFormatter/DateFormatter.class.js");
     Std.all.Timeout = Std.classes.Timeout = $compiler.inject.source("./apis/time/Timeout/Timeout.class.js");
     Std.all.Performancer = Std.classes.Performancer = $compiler.inject.source("./apis/time/Performancer/Performancer.class.js");
+    Std.all.Performancer2 = Std.classes.Performancer2 = $compiler.inject.source("./apis/time/Performancer2/Performancer2.class.js");
     Std.all.TryableProxy = Std.classes.TryableProxy = $compiler.inject.source("./apis/errors/TryableProxy/TryableProxy.class.js");
     Std.all.TryableInterface = Std.interfaces.TryableInterface = $compiler.inject.source("./apis/patterns/TryableInterface/TryableInterface.interface.js");
     Std.all.JsonStringifier = Std.classes.JsonStringifier = $compiler.inject.source("./apis/json/JsonStringifier/JsonStringifier.class.js");
@@ -153,6 +156,7 @@
 
   }
   Wave_11_Operative_system: {
+    Std.all.CmdFormatter = Std.classes.CmdFormatter = $compiler.inject.source("./apis/os/cmd/CmdFormatter/CmdFormatter.class.js");
     Std.all.ProcessUtils = Std.classes.ProcessUtils = $compiler.inject.source("./apis/os/process/ProcessUtils.class.js");
     Std.all.ThreadInterface = Std.interfaces.ThreadInterface = $compiler.inject.source("./apis/os/threads/ThreadInterface/ThreadInterface.interface.js");
     Std.all.Thread = Std.classes.Thread = $compiler.inject.source("./apis/os/threads/Thread/Thread.class.js");

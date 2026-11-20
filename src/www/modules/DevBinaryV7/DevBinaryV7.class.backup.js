@@ -1,24 +1,6 @@
-module.exports = $moduler.import([
-  "@/dist/www/modules/Refrescador/Refrescador.dist.js",
-  "@/dist/www/modules/CompilerV7/CompilerV7.dist.js",
-], function() {
-  return Std.all.DevBinaryV7 = Std.classes.DevBinaryV7 = class DevBinaryV7 {
+class DevBinaryV7 {
   static utils = {
-    findRootDirectoryFrom: async (file, target = "package.json") => {
-  const fsp = require("fs").promises;
-  const path = require("path");
-  let dir = file;
-  let dirBefore = null;
-  let isSatisfied = false;
-  do {
-    dirBefore = dir;
-    dir = path.dirname(dir);
-    const fileTarget = `${dir}/${target}`;
-    isSatisfied = await fsp.access(fileTarget).then(() => true).catch(() => false);
-    if(isSatisfied) return dir;
-  } while(dir !== dirBefore);
-  return null;
-},
+    findRootDirectoryFrom: $compiler.inject.source("./static.utils.findRootDirectoryFrom.js"),
   };
   static loop (optionsBrute = {}) {
   let options;
@@ -47,7 +29,7 @@ module.exports = $moduler.import([
   Start_watcher: {
     info.print("[*] DevBinaryV7 looping on: " + options.target);
     const watcher = require("chokidar").watch(options.target);
-    watcher.on("change", async (file) => this.touch(file, options));
+    watcher.on("change", (file) => this.touch(file, options));
     return { watcher };
     /*
     Std.externals.Refrescador.run({
@@ -81,13 +63,31 @@ module.exports = $moduler.import([
   static async touch (file, options) {
   let out = [];
   const picomatch = require("picomatch");
-  const reactors = options.reactors;
   const rootFile = $moduler.rootdirOf(file);
+  let reactors;
+  if(typeof options.reactors === "string") {
+    reactors = Std.functions.requireNewly($moduler.normalizationOf(options.reactors));
+    if(typeof reactors === "function") {
+      reactors = await reactors(file, options, { action: "touch" });
+    }
+  } else {
+    reactors = options.reactors;
+  }
+  console.log("[*] Current reactors:", reactors);
+  Validate_reactors: {
+    $moduler.assert(Array.isArray(reactors), "Parameter «options.reactors» must be string or array on «DevBinaryV7.touch»");
+    for(let index=0; index<reactors.length.length; index++) {
+      const reactor = reactors.length[index];
+      $moduler.assert(typeof reactor === "object", `Parameter «options.reactors» at index «${index}» must be object on «DevBinaryV7.touch»`);
+      $moduler.assert(typeof reactor.from === "string", `Property «from» at parameter «options.reactors» at index «${index}» must be string on «DevBinaryV7.touch»`);
+      $moduler.assert(typeof reactor.do === "function", `Property «do» at parameter «options.reactors» at index «${index}» must be function on «DevBinaryV7.touch»`);
+    }
+  }
   Std.classes.AnsiProfiles.as("silent:1").print(`[*] DevBinaryV7 touches «${rootFile}»`);
   Iterating_reactors:
   for(let index=0; index<reactors.length; index++) {
     const reactor = reactors[index];
-    if(!picomatch.isMatch(rootFile, reactor.from)) {
+    if(!picomatch.isMatch(rootFile, ...(reactor.from ? [reactor.from] : []))) {
       continue Iterating_reactors;
     }
     let result = reactor.do(file, options);
@@ -98,5 +98,4 @@ module.exports = $moduler.import([
   }
   return out;
 }
-};
-});
+}

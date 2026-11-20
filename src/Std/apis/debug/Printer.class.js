@@ -71,7 +71,7 @@ class Printer {
   }
 
   static debugClass(target) {
-    return console.log(this.describeClass(target));
+    return this.json(this.describeClass(target));
   }
 
   static debug(...args) {

@@ -239,8 +239,8 @@ class CompilerV7 {
     ], this);
   }
 
-  constructor(defaultOptions = {}) {
-    Object.assign(this, {}, this.constructor.defaultInstance, defaultOptions);
+  constructor(defaultOptions = {}, defaultSettings = {}) {
+    Object.assign(this, {}, defaultOptions);
   }
 
 }

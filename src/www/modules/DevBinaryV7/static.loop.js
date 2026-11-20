@@ -25,7 +25,7 @@ static loop (optionsBrute = {}) {
   Start_watcher: {
     info.print("[*] DevBinaryV7 looping on: " + options.target);
     const watcher = require("chokidar").watch(options.target);
-    watcher.on("change", async (file) => this.touch(file, options));
+    watcher.on("change", (file) => this.touch(file, options));
     return { watcher };
     /*
     Std.externals.Refrescador.run({
